@@ -1,0 +1,14 @@
+{% extends  'blog/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+  
+<div class="border p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3">حذف التدوينة  </legend>
+    <legend class="border-bottom pb-1 mb-3">هل انت متأكد من حذف التدوينة '{{ object.title }}'   </legend>
+    <form method="POST">
+        {% csrf_token %}
+        <a  class="btn btn-secondary mt-4 " href="{% url 'detail' object.id %}">تراجع </a>
+        <input class="btn btn-danger mt-4 back-btn" type="submit" value="حذف">
+    </form>
+</div>
+{% endblock content %} 

@@ -1,0 +1,75 @@
+
+{% extends  'blog/base.html' %}
+{% block content %}
+{% load static %}
+
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags }}">
+    {{message}}
+</div>
+
+
+{% endfor %}
+{% endif %}
+
+  
+<div class="border p-4 mb-5">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <img class="img-fluid rounded-circle border m-2" style="width: 120px; height: 120px;" src="{{user.profile.image.url}}" alt=" profile photo " width="100px">
+            <a class="btn btn-secondary mt-3" href="{% url 'profile_update'%}"> <i class="fas fa-pen fa-xs "></i>  تعديل </a> 
+        </div>
+        <div class="col-md-9 ">
+            <h2 class="mb-4" >{{user.username}}</h2>
+            <p class="font-weight-bold">الأسم : <span class="font-weight-normal" >{{ user.first_name }} {{ user.last_name }} </span></p>
+            <p class="font-weight-bold">البريد الالكتروني  : <span class="font-weight-normal" >{{ user.email }}</span></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md">
+        <h3 class="border-bottom pb-3 mb-3"> عدد التدوينات</h3>
+        <h4 class=" bg-secondary text-center p-3 text-light">
+            {{posts.count}}
+        </h4>
+        <h3 class="border-bottom mt-3 pb-2">تدويناتي</h3>
+        {% for post in posts %}
+        <ul class="p-2">
+            <a class="text-dark" href="{% url 'detail' post.id %}">{{ post.title  }} </a>
+        </ul>
+        {% empty %}
+        <h4 class="text-center mb-5"> لم تقم بتدوين اي مدونة بعد</h4>
+        {% endfor%}
+    </div>
+</div>
+
+{% if post.count >= 10 %}
+<div class="border-top pt-3 mt-3 text-center">
+    <a class="btn btn-secondary  bg-secondary" href="#"> السابق</a>
+    <span class="pr-4 pl-4 "> صفحة 15 من 22 </span>
+    <a class="btn btn-secondary  bg-secondary" href="#"> التالي</a>
+</div>
+{% endif %}
+
+{% endblock content %} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
